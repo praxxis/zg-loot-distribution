@@ -31,6 +31,20 @@ const initialItems: {[k in Items]: number} = {
   witherbark: 0,
 };
 
+const itemNames = [
+  'bijou',
+  'zulian',
+  'razzashi',
+  'hakkari',
+  'sandfury',
+  'skullsplitter',
+  'bloodscalp',
+  'gurubashi',
+  'vilebranch',
+  'witherbark',
+] as const;
+
+export {itemNames};
 
 const initialCharacters: {[name: string]: Character} = {};
 

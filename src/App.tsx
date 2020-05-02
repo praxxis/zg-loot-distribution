@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import useStore from './store';
+import useStore, { itemNames } from './store';
+import ItemInput from './components/ItemInput';
 
 function App() {
   const [{ characters }, { updateCharacters, updateItem}] = useStore();
-  const[bijouCount, setBijouCount] = useState(0);
 
   return (
     <div className="App">
       <header className="App-header">
         Characters: <textarea onBlur={(e) => updateCharacters(e.target.value.split("\n"))}></textarea> <br />
-        Bijous: <input type="text" onChange={(e) => setBijouCount(Number(e.target.value))} onBlur={() => updateItem('bijou', bijouCount)} value={bijouCount} /> <br />
+        {itemNames.map((itemName) => <div key={itemName}><ItemInput name={itemName} onBlur={(count) => updateItem(itemName, count)} /></div>)}
         <ul>
           {Object.keys(characters).map((name) => (
-            <li key={name}>{name}: {characters[name].items['bijou']}</li>
+            <li key={name}>{name}: {itemNames.map((itemName) => <div key={itemName}>{itemName}: {characters[name].items[itemName]}</div>)}</li>
           ))}
         </ul>
       </header>
