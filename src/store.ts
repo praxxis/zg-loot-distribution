@@ -65,9 +65,9 @@ const useStore = () => {
 
   const updateCharacters = useCallback((newCharacters: string[]) => dispatch({type: 'UPDATE_CHARACTERS', newCharacters}), [dispatch]);
 
-  const updateBijou = useCallback((count: number) => dispatch({ type: 'UPDATE_ITEM', itemName: 'bijou', count }), [dispatch]);
+  const updateItem = useCallback((itemName: Items, count: number) => dispatch({ type: 'UPDATE_ITEM', itemName, count }), [dispatch]);
 
-  return [state, { updateCharacters, updateBijou}] as const;
+  return [state, { updateCharacters, updateItem}] as const;
 };
 
 export default useStore;
