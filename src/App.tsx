@@ -1,23 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import useStore from './store';
 
 function App() {
+  const [{ characters}, { updateCharacters, updateBijou}] = useStore();
+  const[bijouCount, setBijouCount] = useState(0);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        Characters: <textarea onBlur={(e) => updateCharacters(e.target.value.split("\n"))}></textarea> <br />
+        Bijous: <input type="text" onChange={(e) => setBijouCount(Number(e.target.value))} onBlur={() => updateBijou(bijouCount)} value={bijouCount} /> <br />
+        <ul>
+          {Object.keys(characters).map((name) => (
+            <li key={name}>{name}: {characters[name].items['bijou']}</li>
+          ))}
+        </ul>
       </header>
     </div>
   );
