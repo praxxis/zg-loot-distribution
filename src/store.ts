@@ -9,9 +9,14 @@ Gurubashi, Vilebranch, and Witherbark Coins: Gurubashi Coin x1, Vilebranch Coin 
  })
  */
 
-import { useReducer, useCallback } from 'react';
+import { useCallback } from 'react';
 import {Items, Character} from './types';
 import { distributeItem } from './lib';
+import {useImmerReducer} from 'use-immer';
+import { setAutoFreeze } from 'immer';
+
+// todo: investigate this error
+setAutoFreeze(false);
 
 const initialItems: {[k in Items]: number} = {
   bijou: 0,
@@ -39,35 +44,28 @@ type Action =
  | {type: 'UPDATE_ITEM', itemName: Items, count: number};
 
 const useStore = () => {
-  const [state, dispatch] = useReducer((state: State, action: Action) => {
+  const [state, dispatch] = useImmerReducer((draft: State, action: Action) => {
     switch (action.type) {
       case 'UPDATE_CHARACTERS':
         let characters = action.newCharacters.reduce((accu, name) => {
           return {...accu, [name]: {sent: false, items: {...initialItems}}}
         }, {});
 
-        characters = distributeItem(characters, 'bijou', state.items['bijou']);
-
-        return {
-          ...state,
-          characters
-        };
+        draft.characters = distributeItem(characters, 'bijou', draft.items['bijou']);
+        break;
       case 'UPDATE_ITEM':
-        return {
-          ...state,
-          items: { ...state.items, [action.itemName]: action.count },
-          characters: distributeItem(state.characters, action.itemName, action.count),
-        };
+        draft.items[action.itemName] = action.count;
+        draft.characters = distributeItem(draft.characters, action.itemName, action.count);
+        break;
     }
-    return state;
   }, {
     items: initialItems,
     characters: initialCharacters,
   });
 
-  const updateCharacters = useCallback((newCharacters: string[]) => dispatch({type: 'UPDATE_CHARACTERS', newCharacters}), []);
+  const updateCharacters = useCallback((newCharacters: string[]) => dispatch({type: 'UPDATE_CHARACTERS', newCharacters}), [dispatch]);
 
-  const updateBijou = useCallback((count: number) => dispatch({ type: 'UPDATE_ITEM', itemName: 'bijou', count }), []);
+  const updateBijou = useCallback((count: number) => dispatch({ type: 'UPDATE_ITEM', itemName: 'bijou', count }), [dispatch]);
 
   return [state, { updateCharacters, updateBijou}] as const;
 };
