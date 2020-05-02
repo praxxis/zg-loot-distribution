@@ -1,6 +1,325 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`distributeItem distributes when characters < number of items * 2 1`] = `
+exports[`distribution distributeCoinSets works 1`] = `
+Object {
+  "Cabinets/Garage": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 0,
+      "hakkari": 1,
+      "razzashi": 1,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 1,
+    },
+    "sent": false,
+  },
+  "Defecography": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 1,
+      "gurubashi": 0,
+      "hakkari": 0,
+      "razzashi": 0,
+      "sandfury": 1,
+      "skullsplitter": 1,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 0,
+    },
+    "sent": false,
+  },
+  "Dioica": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 1,
+      "hakkari": 0,
+      "razzashi": 0,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 1,
+      "witherbark": 1,
+      "zulian": 0,
+    },
+    "sent": false,
+  },
+  "Eyopotato": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 1,
+      "gurubashi": 0,
+      "hakkari": 0,
+      "razzashi": 0,
+      "sandfury": 1,
+      "skullsplitter": 1,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 0,
+    },
+    "sent": false,
+  },
+  "Fingerblast": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 0,
+      "hakkari": 1,
+      "razzashi": 1,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 1,
+    },
+    "sent": false,
+  },
+  "Gearman": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 0,
+      "hakkari": 1,
+      "razzashi": 1,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 1,
+    },
+    "sent": false,
+  },
+  "Hah": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 0,
+      "hakkari": 1,
+      "razzashi": 1,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 1,
+    },
+    "sent": false,
+  },
+  "Ironhead": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 1,
+      "gurubashi": 0,
+      "hakkari": 0,
+      "razzashi": 0,
+      "sandfury": 1,
+      "skullsplitter": 1,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 0,
+    },
+    "sent": false,
+  },
+  "Marzik": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 1,
+      "hakkari": 0,
+      "razzashi": 0,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 1,
+      "witherbark": 1,
+      "zulian": 0,
+    },
+    "sent": false,
+  },
+  "Mattson": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 0,
+      "hakkari": 1,
+      "razzashi": 1,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 1,
+    },
+    "sent": false,
+  },
+  "Meship": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 1,
+      "hakkari": 0,
+      "razzashi": 0,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 1,
+      "witherbark": 1,
+      "zulian": 0,
+    },
+    "sent": false,
+  },
+  "Orcrouge": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 1,
+      "gurubashi": 0,
+      "hakkari": 0,
+      "razzashi": 0,
+      "sandfury": 1,
+      "skullsplitter": 1,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 0,
+    },
+    "sent": false,
+  },
+  "Potatocrisp": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 0,
+      "hakkari": 1,
+      "razzashi": 1,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 1,
+    },
+    "sent": false,
+  },
+  "Praxxis": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 0,
+      "hakkari": 1,
+      "razzashi": 1,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 1,
+    },
+    "sent": false,
+  },
+  "Prettypanda": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 1,
+      "hakkari": 0,
+      "razzashi": 0,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 1,
+      "witherbark": 1,
+      "zulian": 0,
+    },
+    "sent": false,
+  },
+  "Shealer": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 1,
+      "hakkari": 0,
+      "razzashi": 0,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 1,
+      "witherbark": 1,
+      "zulian": 0,
+    },
+    "sent": false,
+  },
+  "Shishkabob": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 1,
+      "gurubashi": 0,
+      "hakkari": 0,
+      "razzashi": 0,
+      "sandfury": 1,
+      "skullsplitter": 1,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 0,
+    },
+    "sent": false,
+  },
+  "Teaspoon": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 0,
+      "hakkari": 1,
+      "razzashi": 1,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 1,
+    },
+    "sent": false,
+  },
+  "Trogz": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 1,
+      "hakkari": 0,
+      "razzashi": 0,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 1,
+      "witherbark": 1,
+      "zulian": 0,
+    },
+    "sent": false,
+  },
+  "Zeelazee": Object {
+    "items": Object {
+      "bijou": 0,
+      "bloodscalp": 0,
+      "gurubashi": 0,
+      "hakkari": 1,
+      "razzashi": 1,
+      "sandfury": 0,
+      "skullsplitter": 0,
+      "vilebranch": 0,
+      "witherbark": 0,
+      "zulian": 1,
+    },
+    "sent": false,
+  },
+}
+`;
+
+exports[`distribution distributeCoinSets works 2`] = `
+Object {
+  "bloodscalp": 8,
+  "gurubashi": 0,
+  "hakkari": 4,
+  "razzashi": 2,
+  "sandfury": 5,
+  "skullsplitter": 0,
+  "vilebranch": 8,
+  "witherbark": 9,
+  "zulian": 0,
+}
+`;
+
+exports[`distribution distributeItem distributes when characters < number of items * 2 1`] = `
 Object {
   "Cabinets/Garage": Object {
     "items": Object {
@@ -305,7 +624,7 @@ Object {
 }
 `;
 
-exports[`distributeItem distributes when characters < number of items 1`] = `
+exports[`distribution distributeItem distributes when characters === number of items 1`] = `
 Object {
   "Cabinets/Garage": Object {
     "items": Object {
@@ -610,312 +929,7 @@ Object {
 }
 `;
 
-exports[`distributeItem distributes when characters === number of items 1`] = `
-Object {
-  "Cabinets/Garage": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Defecography": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Dioica": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Eyopotato": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Fingerblast": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Gearman": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Hah": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Ironhead": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Marzik": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Mattson": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Meship": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Orcrouge": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Potatocrisp": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Praxxis": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Prettypanda": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Shealer": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Shishkabob": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Teaspoon": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Trogz": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-  "Zeelazee": Object {
-    "items": Object {
-      "bijou": 1,
-      "bloodscalp": 0,
-      "gurubashi": 0,
-      "hakkari": 0,
-      "razzashi": 0,
-      "sandfury": 0,
-      "skullsplitter": 0,
-      "vilebranch": 0,
-      "witherbark": 0,
-      "zulian": 0,
-    },
-    "sent": false,
-  },
-}
-`;
-
-exports[`distributeItem distributes when characters > number of items 1`] = `
+exports[`distribution distributeItem distributes when characters > number of items 1`] = `
 Object {
   "Cabinets/Garage": Object {
     "items": Object {
@@ -1220,7 +1234,7 @@ Object {
 }
 `;
 
-exports[`distributeItem with existing item counts resets the count to 0 as it distributes items 1`] = `
+exports[`distribution distributeItem with existing item counts resets the count to 0 as it distributes items 1`] = `
 Object {
   "Cabinets/Garage": Object {
     "items": Object {
@@ -1525,7 +1539,7 @@ Object {
 }
 `;
 
-exports[`distributeItem with existing item counts resets the count to 0 if an item is not distributed 1`] = `
+exports[`distribution distributeItem with existing item counts resets the count to 0 if an item is not distributed 1`] = `
 Object {
   "Hah": Object {
     "items": Object {

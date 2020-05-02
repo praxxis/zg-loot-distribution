@@ -1,17 +1,6 @@
-/*
-Zulian, Razzashi, and Hakkari Coins: Zulian Coin x1, Razzashi Coin x1, Hakkari Coin x1
-Sandfury, Skullsplitter, and Bloodscalp Coins: Sandfury Coin x1, Skullsplitter Coin x1, Bloodscalp Coin x1
-Gurubashi, Vilebranch, and Witherbark Coins: Gurubashi Coin x1, Vilebranch Coin x1, Witherbark Coin x1
-
-[['coin1', 'coin2', 'coin3'],
- ['coin1', 'coin2', 'coin3']].forEach((set) => {
-     // minBy
- })
- */
-
 import { useCallback } from 'react';
 import {Items, Character} from './types';
-import { distributeItem } from './lib';
+import { distributeItem, distributeItems } from './lib';
 import {useImmerReducer} from 'use-immer';
 import { setAutoFreeze } from 'immer';
 
@@ -65,11 +54,11 @@ const useStore = () => {
           return {...accu, [name]: {sent: false, items: {...initialItems}}}
         }, {});
 
-        draft.characters = distributeItem(characters, 'bijou', draft.items['bijou']);
+        draft.characters = distributeItems(characters, draft.items);
         break;
       case 'UPDATE_ITEM':
         draft.items[action.itemName] = action.count;
-        draft.characters = distributeItem(draft.characters, action.itemName, action.count);
+        draft.characters = distributeItems(draft.characters, draft.items);
         break;
     }
   }, {

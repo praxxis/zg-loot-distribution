@@ -1,5 +1,5 @@
 import { Character } from '../types';
-import { distributeItem } from '../lib';
+import { distributeItem, distributeCoinSets } from '../lib';
 
 function charFactory(name: string, items: {} = {}) {
   return {
@@ -22,7 +22,7 @@ function charFactory(name: string, items: {} = {}) {
   }
 }
 
-describe('distributeItem', () => {
+describe('distribution', () => {
   let characters: { [name: string]: Character };
 
   beforeEach(() => {
@@ -48,47 +48,69 @@ describe('distributeItem', () => {
       ...charFactory('Meship'),
       ...charFactory('Trogz'),
     }
-  })
-
-  it('distributes when characters > number of items', () => {
-    const distributed = distributeItem(characters, 'bijou', 15);
-    expect(distributed).toMatchSnapshot();
   });
 
-  it('distributes when characters === number of items', () => {
-    const distributed = distributeItem(characters, 'bijou', 20);
-    expect(distributed).toMatchSnapshot();
-  });
+  describe('distributeItem', () => {
+    it('distributes when characters > number of items', () => {
+      const distributed = distributeItem(characters, 'bijou', 15);
+      expect(distributed).toMatchSnapshot();
+    });
 
-  xit('distributes when characters < number of items', () => {
-    const distributed = distributeItem(characters, 'bijou', 25);
-    expect(distributed).toMatchSnapshot();
-  });
-
-  it('distributes when characters < number of items * 2', () => {
-    const distributed = distributeItem(characters, 'bijou', 45);
-    expect(distributed).toMatchSnapshot();
-  });
-
-  describe('with existing item counts', () => {
-    it('resets the count to 0 as it distributes items', () => {
-      characters = {
-        ...characters,
-        ...charFactory('Hah', {bijou: 42}),
-      }
-
+    it('distributes when characters === number of items', () => {
       const distributed = distributeItem(characters, 'bijou', 20);
       expect(distributed).toMatchSnapshot();
     });
 
-    it('resets the count to 0 if an item is not distributed', () => {
-      characters = {
-        ...charFactory('Hah'),
-        ...charFactory('Teaspoon', { bijou: 42 }),
-      }
-
-      const distributed = distributeItem(characters, 'bijou', 1);
+    xit('distributes when characters < number of items', () => {
+      const distributed = distributeItem(characters, 'bijou', 25);
       expect(distributed).toMatchSnapshot();
+    });
+
+    it('distributes when characters < number of items * 2', () => {
+      const distributed = distributeItem(characters, 'bijou', 45);
+      expect(distributed).toMatchSnapshot();
+    });
+
+    describe('with existing item counts', () => {
+      it('resets the count to 0 as it distributes items', () => {
+        characters = {
+          ...characters,
+          ...charFactory('Hah', {bijou: 42}),
+        }
+
+        const distributed = distributeItem(characters, 'bijou', 20);
+        expect(distributed).toMatchSnapshot();
+      });
+
+      it('resets the count to 0 if an item is not distributed', () => {
+        characters = {
+          ...charFactory('Hah'),
+          ...charFactory('Teaspoon', { bijou: 42 }),
+        }
+
+        const distributed = distributeItem(characters, 'bijou', 1);
+        expect(distributed).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe('distributeCoinSets', () => {
+    it('works', () => {
+      const [distributed, remainingCoins] = distributeCoinSets(characters, {
+        zulian: 9,
+        razzashi: 11,
+        hakkari: 13,
+
+        sandfury: 10,
+        skullsplitter: 5,
+        bloodscalp: 13,
+
+        gurubashi: 8,
+        vilebranch: 16,
+        witherbark: 17,
+      });
+      expect(distributed).toMatchSnapshot();
+      expect(remainingCoins).toMatchSnapshot();
     });
   });
 });
