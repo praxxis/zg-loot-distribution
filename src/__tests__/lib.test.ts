@@ -1,26 +1,28 @@
 import { Character } from '../types';
-import { distributeItem, distributeCoinSets } from '../lib';
+import { distributeItem, distributeCoinSets, repSum, lowestRepSort, nonRepSum } from '../lib';
 
 function charFactory(name: string, items: {} = {}) {
   return {
     [name]: {
       sent: false,
-      items: {
-        ...items,
-        bijou: 0,
-        zulian: 0,
-        razzashi: 0,
-        hakkari: 0,
-        sandfury: 0,
-        skullsplitter: 0,
-        bloodscalp: 0,
-        gurubashi: 0,
-        vilebranch: 0,
-        witherbark: 0,
-      }
+      items: itemsFactory(items),
     }
   }
 }
+
+let itemsFactory = (items: {}) => ({
+  bijou: 0,
+  zulian: 0,
+  razzashi: 0,
+  hakkari: 0,
+  sandfury: 0,
+  skullsplitter: 0,
+  bloodscalp: 0,
+  gurubashi: 0,
+  vilebranch: 0,
+  witherbark: 0,
+  ...items,
+});
 
 describe('distribution', () => {
   let characters: { [name: string]: Character };
@@ -52,51 +54,36 @@ describe('distribution', () => {
 
   describe('distributeItem', () => {
     it('distributes when characters > number of items', () => {
-      const distributed = distributeItem(characters, 'bijou', 15);
-      expect(distributed).toMatchSnapshot();
+      const distributed = distributeItem(characters, itemsFactory({bijou: 15}), 'bijou');
+      expect(distributed[0]).toMatchSnapshot();
     });
 
     it('distributes when characters === number of items', () => {
-      const distributed = distributeItem(characters, 'bijou', 20);
-      expect(distributed).toMatchSnapshot();
+      const distributed = distributeItem(characters, itemsFactory({ bijou: 20 }), 'bijou');
+      expect(distributed[0]).toMatchSnapshot();
     });
 
-    xit('distributes when characters < number of items', () => {
-      const distributed = distributeItem(characters, 'bijou', 25);
-      expect(distributed).toMatchSnapshot();
+    it('distributes when characters < number of items', () => {
+      const distributed = distributeItem(characters, itemsFactory({ bijou: 25 }), 'bijou');
+      expect(distributed[0]).toMatchSnapshot();
     });
 
     it('distributes when characters < number of items * 2', () => {
-      const distributed = distributeItem(characters, 'bijou', 45);
-      expect(distributed).toMatchSnapshot();
+      const distributed = distributeItem(characters, itemsFactory({ bijou: 45 }), 'bijou');
+      expect(distributed[0]).toMatchSnapshot();
     });
 
-    describe('with existing item counts', () => {
-      it('resets the count to 0 as it distributes items', () => {
-        characters = {
-          ...characters,
-          ...charFactory('Hah', {bijou: 42}),
-        }
-
-        const distributed = distributeItem(characters, 'bijou', 20);
-        expect(distributed).toMatchSnapshot();
-      });
-
-      it('resets the count to 0 if an item is not distributed', () => {
-        characters = {
-          ...charFactory('Hah'),
-          ...charFactory('Teaspoon', { bijou: 42 }),
-        }
-
-        const distributed = distributeItem(characters, 'bijou', 1);
-        expect(distributed).toMatchSnapshot();
-      });
+    it('removes the number of distributed items from the item count', () => {
+      const distributed = distributeItem(characters, itemsFactory({ bijou: 25 }), 'bijou');
+      expect(distributed[1]).toMatchSnapshot();
     });
   });
 
   describe('distributeCoinSets', () => {
     it('works', () => {
       const [distributed, remainingCoins] = distributeCoinSets(characters, {
+        bijou: 0,
+
         zulian: 9,
         razzashi: 11,
         hakkari: 13,
@@ -113,4 +100,96 @@ describe('distribution', () => {
       expect(remainingCoins).toMatchSnapshot();
     });
   });
+
+  describe('repSum', () => {
+    it('works', () => {
+      const chars = charFactory('Hah', {
+        bijou: 1,
+        zulian: 1,
+        razzashi: 1,
+        hakkari: 1,
+        sandfury: 1,
+        skullsplitter: 1,
+        bloodscalp: 1,
+        gurubashi: 1,
+        vilebranch: 1,
+        witherbark: 1,
+      });
+
+      expect(repSum(chars['Hah'].items)).toEqual(150);
+    });
+
+    it('only counts full coin sets', () => {
+      const chars = charFactory('Hah', {
+        bijou: 0,
+
+        zulian: 2,
+        razzashi: 4,
+        hakkari: 9,
+
+        sandfury: 1,
+        skullsplitter: 3,
+        bloodscalp: 1,
+
+        gurubashi: 0,
+        vilebranch: 1,
+        witherbark: 1,
+      });
+
+      expect(repSum(chars['Hah'].items)).toEqual(75);
+    });
+  });
+
+  describe('lowestRepSort', () => {
+    it('works', () => {
+      characters = {
+        ...charFactory('Hah', {bijou: 1}),
+        ...charFactory('Gearman'),
+        ...charFactory('Teaspoon', {
+          gurubashi: 1,
+          vilebranch: 1,
+          witherbark: 1,
+        }),
+        ...charFactory('Cabinets/Garage', {
+          zulian: 2,
+          razzashi: 4,
+          hakkari: 9
+        }),
+      }
+
+      expect(lowestRepSort(characters)).toMatchSnapshot();
+    });
+
+    it('tie breaks using the count of non rep items', () => {
+      characters = {
+        ...charFactory('Hah', { bijou: 1 }),
+        ...charFactory('Gearman'),
+        ...charFactory('Teaspoon', {
+          gurubashi: 3,
+          vilebranch: 3,
+          witherbark: 3,
+        }),
+        ...charFactory('Cabinets/Garage', {
+          zulian: 1,
+          razzashi: 4,
+          hakkari: 4,
+        }),
+      }
+
+      // tsp and garage have the same number of coins, but tsp's items represent 75 rep while Garage's only represent 25 rep
+      expect(lowestRepSort(characters)).toMatchSnapshot();
+    });
+  });
+
+  describe('nonRepSum', () => {
+    it('works', () => {
+      expect(nonRepSum(itemsFactory({
+        bijou: 1,
+        zulian: 1,
+        razzashi: 2,
+        hakkari: 1,
+        sandfury: 1,
+      }))).toEqual(2);
+    })
+  })
 });
