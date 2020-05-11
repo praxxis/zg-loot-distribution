@@ -20,7 +20,7 @@ export const coinSets = [
 ];
 
 // TODO: freeze?
-export const emptyItems: {[k in Items]: number} = {
+export const emptyItems: Items = {
   bijou: 0,
   zulian: 0,
   razzashi: 0,

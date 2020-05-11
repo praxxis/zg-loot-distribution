@@ -1,17 +1,17 @@
 import {coinSets} from '../const';
-import {Character, Items} from '../types';
+import {Character, ItemNames} from '../types';
 
 export const times = (count: number, cb: (i: number) => void) =>
   [...Array(count)].forEach((_, i) => cb(i));
 
-export const repSum = (items: {[k in Items]: number}) =>
+export const repSum = (items: {[k in ItemNames]: number}) =>
   items.bijou * 75 +
   coinSets.reduce(
     (rep, coins) => rep + Math.min(items[coins[0]], items[coins[1]], items[coins[2]]) * 25,
     0
   );
 
-export const nonRepSum = (items: {[k in Items]: number}) => {
+export const nonRepSum = (items: {[k in ItemNames]: number}) => {
   const counts = {...items};
 
   coinSets.forEach((coins) => {
@@ -24,7 +24,7 @@ export const nonRepSum = (items: {[k in Items]: number}) => {
 
   return Object.keys(counts)
     .filter((name) => name !== 'bijou')
-    .reduce((accu, name) => accu + counts[name as Items], 0);
+    .reduce((accu, name) => accu + counts[name as ItemNames], 0);
 };
 
 export const lowestRepSort = (characters: {[name: string]: Character}) => {

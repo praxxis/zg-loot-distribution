@@ -1,16 +1,19 @@
-export type Items =
-  | 'bijou'
-  | 'zulian'
-  | 'razzashi'
-  | 'hakkari'
-  | 'sandfury'
-  | 'skullsplitter'
-  | 'bloodscalp'
-  | 'gurubashi'
-  | 'vilebranch'
-  | 'witherbark';
+export type Items = {
+  bijou: number;
+  zulian: number;
+  razzashi: number;
+  hakkari: number;
+  sandfury: number;
+  skullsplitter: number;
+  bloodscalp: number;
+  gurubashi: number;
+  vilebranch: number;
+  witherbark: number;
+};
+
+export type ItemNames = keyof Items;
 
 export interface Character {
   sent: boolean;
-  items: {[k in Items]: number};
+  items: Items;
 }

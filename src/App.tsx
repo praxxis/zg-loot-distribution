@@ -1,8 +1,7 @@
-import {Box, CSSReset, Flex, Heading, SimpleGrid, Textarea, ThemeProvider} from '@chakra-ui/core';
+import {CSSReset, Flex, Heading, ThemeProvider} from '@chakra-ui/core';
 import React from 'react';
-import ItemInput from './components/ItemInput';
-import {itemNames} from './const';
-import {repSum} from './lib';
+import Characters from './components/Characters';
+import Controls from './components/Controls';
 import useStore from './store';
 
 function App() {
@@ -15,55 +14,8 @@ function App() {
         <Flex direction="column" p={5}>
           <Heading>Zul'Gurub bijou and coin distribution tool</Heading>
           <Flex direction="column">
-            <Flex>
-              <Box p={5}>
-                <Textarea
-                  height={400}
-                  placeholder="Enter character names, one per line"
-                  onBlur={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    updateCharacters(e.target.value.split('\n'))
-                  }
-                ></Textarea>
-              </Box>
-              <Box p={5}>
-                <ItemInput
-                  name={'bijou'}
-                  value={items['bijou']}
-                  onBlur={(count) => updateItem('bijou', count)}
-                />
-                <SimpleGrid columns={3} spacing={2}>
-                  {itemNames
-                    .filter((itemName) => itemName !== 'bijou')
-                    .map((itemName) => (
-                      <div key={itemName}>
-                        <ItemInput
-                          name={itemName}
-                          value={items[itemName]}
-                          onBlur={(count) => updateItem(itemName, count)}
-                        />
-                      </div>
-                    ))}
-                </SimpleGrid>
-              </Box>
-            </Flex>
-
-            <SimpleGrid columns={3} spacing={2}>
-              {Object.keys(characters).map((name) => (
-                <Box key={name} bg="gray.200">
-                  {name} (total rep: {repSum(characters[name].items)})<br />
-                  <div key={`${name}bijou`}>bijou: {characters[name].items['bijou']}</div>
-                  <SimpleGrid columns={3} spacing={2}>
-                    {itemNames
-                      .filter((itemName) => itemName !== 'bijou')
-                      .map((itemName) => (
-                        <div key={`${name}${itemName}`}>
-                          {itemName}: {characters[name].items[itemName]}
-                        </div>
-                      ))}
-                  </SimpleGrid>
-                </Box>
-              ))}
-            </SimpleGrid>
+            <Controls items={items} updateCharacters={updateCharacters} updateItem={updateItem} />
+            <Characters characters={characters} />
           </Flex>
         </Flex>
       </ThemeProvider>

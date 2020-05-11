@@ -1,12 +1,12 @@
 import produce from 'immer';
 import {coinSets, emptyItems} from '../const';
-import {Character, Items} from '../types';
+import {Character, ItemNames} from '../types';
 import {lowestRepSort, times} from './index';
 
 function distributeItem(
   characters: {[name: string]: Character},
-  items: {[k in Items]: number},
-  item: Items
+  items: {[k in ItemNames]: number},
+  item: ItemNames
 ) {
   const names = lowestRepSort(characters);
 
@@ -30,7 +30,7 @@ function distributeItem(
 
 function distributeCoinSets(
   characters: {[name: string]: Character},
-  items: {[k in Items]: number}
+  items: {[k in ItemNames]: number}
 ) {
   const remainingItems = {...items};
 
@@ -69,7 +69,10 @@ function zeroItems(characters: {[name: string]: Character}) {
   });
 }
 
-function distributeItems(characters: {[name: string]: Character}, items: {[k in Items]: number}) {
+function distributeItems(
+  characters: {[name: string]: Character},
+  items: {[k in ItemNames]: number}
+) {
   // distribute items so that rep is evenly spread across the raid, even if some characters get more individual items
   // remember: bijou = 75 rep, coin set = 25 rep
 
@@ -84,10 +87,10 @@ function distributeItems(characters: {[name: string]: Character}, items: {[k in 
 
   // finally, distribute leftover coins, favoring people who have the least rep
   [distributed] = Object.keys(remainingItems)
-    .filter((item) => remainingItems[item as Items] > 0)
+    .filter((item) => remainingItems[item as ItemNames] > 0)
     .reduce(
       (accu, item) => {
-        const [distributed, remainingItems] = distributeItem(accu[0], accu[1], item as Items);
+        const [distributed, remainingItems] = distributeItem(accu[0], accu[1], item as ItemNames);
         return [distributed, remainingItems] as const;
       },
       [distributed, remainingItems] as const
