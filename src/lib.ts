@@ -1,7 +1,7 @@
-import { Character, Items } from './types';
 import {produce} from 'immer';
+import {Character, Items} from './types';
 
-const emptyItems: { [k in Items]: number } = {
+const emptyItems: {[k in Items]: number} = {
   bijou: 0,
   zulian: 0,
   razzashi: 0,
@@ -20,14 +20,17 @@ const coinSets = [
   ['gurubashi', 'vilebranch', 'witherbark'] as const,
 ];
 
-const times = (count: number, cb: (i: number) => void) => [...Array(count)].forEach((_, i) => cb(i));
+const times = (count: number, cb: (i: number) => void) =>
+  [...Array(count)].forEach((_, i) => cb(i));
 
-export const repSum = (items: { [k in Items]: number}) => (
-  (items.bijou * 75)
-  + coinSets.reduce((rep, coins) => rep + Math.min(items[coins[0]], items[coins[1]], items[coins[2]]) * 25, 0)
-);
+export const repSum = (items: {[k in Items]: number}) =>
+  items.bijou * 75 +
+  coinSets.reduce(
+    (rep, coins) => rep + Math.min(items[coins[0]], items[coins[1]], items[coins[2]]) * 25,
+    0
+  );
 
-export const nonRepSum = (items: { [k in Items]: number }) => {
+export const nonRepSum = (items: {[k in Items]: number}) => {
   const counts = {...items};
 
   coinSets.forEach((coins) => {
@@ -41,7 +44,7 @@ export const nonRepSum = (items: { [k in Items]: number }) => {
   return Object.keys(counts)
     .filter((name) => name !== 'bijou')
     .reduce((accu, name) => accu + counts[name as Items], 0);
-}
+};
 
 export const lowestRepSort = (characters: {[name: string]: Character}) => {
   return Object.keys(characters).sort((a, b) => {
@@ -63,16 +66,20 @@ export const lowestRepSort = (characters: {[name: string]: Character}) => {
     // this is a reverse sort: we want people with rep to go to the end of the list
     return aRep < bRep ? -1 : 1;
   });
-}
+};
 
-function distributeItem(characters: { [name: string]: Character }, items: { [k in Items]: number }, item: Items) {
+function distributeItem(
+  characters: {[name: string]: Character},
+  items: {[k in Items]: number},
+  item: Items
+) {
   const names = lowestRepSort(characters);
 
   if (names.length === 0) {
     return [characters, items] as const;
   }
 
-  const distributed: { [name: string]: Character } = produce(characters, (draft) => {
+  const distributed: {[name: string]: Character} = produce(characters, (draft) => {
     // zero out this item for everyone
     // names.forEach((name) => draft[name].items[item] = 0);
 
@@ -86,7 +93,10 @@ function distributeItem(characters: { [name: string]: Character }, items: { [k i
   return [distributed, {...items, [item]: 0}] as const;
 }
 
-function distributeCoinSets(characters: { [name: string]: Character }, items: { [k in Items]: number }) {
+function distributeCoinSets(
+  characters: {[name: string]: Character},
+  items: {[k in Items]: number}
+) {
   const remainingItems = {...items};
 
   let names = lowestRepSort(characters);
@@ -95,7 +105,7 @@ function distributeCoinSets(characters: { [name: string]: Character }, items: { 
     return [characters, items] as const;
   }
 
-  const distributed: { [name: string]: Character } = produce(characters, (draft) => {
+  const distributed: {[name: string]: Character} = produce(characters, (draft) => {
     coinSets.forEach((coins) => {
       const min = Math.min(items[coins[0]], items[coins[1]], items[coins[2]]);
 
@@ -118,13 +128,13 @@ function distributeCoinSets(characters: { [name: string]: Character }, items: { 
   return [distributed, remainingItems] as const;
 }
 
-function zeroItems(characters: { [name: string]: Character }) {
+function zeroItems(characters: {[name: string]: Character}) {
   return produce(characters, (draft) => {
-    Object.keys(characters).forEach((name) => draft[name].items = { ...emptyItems});
+    Object.keys(characters).forEach((name) => (draft[name].items = {...emptyItems}));
   });
 }
 
-function distributeItems(characters: { [name: string]: Character }, items: { [k in Items]: number }) {
+function distributeItems(characters: {[name: string]: Character}, items: {[k in Items]: number}) {
   // distribute items so that rep is evenly spread across the raid, even if some characters get more individual items
   // remember: bijou = 75 rep, coin set = 25 rep
 
@@ -138,12 +148,17 @@ function distributeItems(characters: { [name: string]: Character }, items: { [k 
   [distributed, remainingItems] = distributeCoinSets(distributed, remainingItems);
 
   // finally, distribute leftover coins, favoring people who have the least rep
-  [distributed] = Object.keys(remainingItems).filter((item) => remainingItems[item as Items] > 0).reduce((accu, item) => {
-    const [distributed, remainingItems] = distributeItem(accu[0], accu[1], item as Items)
-    return [distributed, remainingItems] as const;
-  }, [distributed, remainingItems] as const)
+  [distributed] = Object.keys(remainingItems)
+    .filter((item) => remainingItems[item as Items] > 0)
+    .reduce(
+      (accu, item) => {
+        const [distributed, remainingItems] = distributeItem(accu[0], accu[1], item as Items);
+        return [distributed, remainingItems] as const;
+      },
+      [distributed, remainingItems] as const
+    );
 
   return distributed;
 }
 
-export { distributeItem, distributeItems, distributeCoinSets};
+export {distributeItem, distributeItems, distributeCoinSets};

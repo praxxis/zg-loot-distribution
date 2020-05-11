@@ -1,13 +1,13 @@
-import { Character } from '../types';
-import { distributeItem, distributeCoinSets, repSum, lowestRepSort, nonRepSum } from '../lib';
+import {distributeCoinSets, distributeItem, lowestRepSort, nonRepSum, repSum} from '../lib';
+import {Character} from '../types';
 
 function charFactory(name: string, items: {} = {}) {
   return {
     [name]: {
       sent: false,
       items: itemsFactory(items),
-    }
-  }
+    },
+  };
 }
 
 let itemsFactory = (items: {}) => ({
@@ -25,7 +25,7 @@ let itemsFactory = (items: {}) => ({
 });
 
 describe('distribution', () => {
-  let characters: { [name: string]: Character };
+  let characters: {[name: string]: Character};
 
   beforeEach(() => {
     characters = {
@@ -49,7 +49,7 @@ describe('distribution', () => {
       ...charFactory('Shealer'),
       ...charFactory('Meship'),
       ...charFactory('Trogz'),
-    }
+    };
   });
 
   describe('distributeItem', () => {
@@ -59,28 +59,28 @@ describe('distribution', () => {
     });
 
     it('distributes when characters === number of items', () => {
-      const distributed = distributeItem(characters, itemsFactory({ bijou: 20 }), 'bijou');
+      const distributed = distributeItem(characters, itemsFactory({bijou: 20}), 'bijou');
       expect(distributed[0]).toMatchSnapshot();
     });
 
     it('distributes when characters < number of items', () => {
-      const distributed = distributeItem(characters, itemsFactory({ bijou: 25 }), 'bijou');
+      const distributed = distributeItem(characters, itemsFactory({bijou: 25}), 'bijou');
       expect(distributed[0]).toMatchSnapshot();
     });
 
     it('distributes when characters < number of items * 2', () => {
-      const distributed = distributeItem(characters, itemsFactory({ bijou: 45 }), 'bijou');
+      const distributed = distributeItem(characters, itemsFactory({bijou: 45}), 'bijou');
       expect(distributed[0]).toMatchSnapshot();
     });
 
     it('removes the number of distributed items from the item count', () => {
-      const distributed = distributeItem(characters, itemsFactory({ bijou: 25 }), 'bijou');
+      const distributed = distributeItem(characters, itemsFactory({bijou: 25}), 'bijou');
       expect(distributed[1]).toMatchSnapshot();
     });
 
     it('handles empty character lists', () => {
       const empty = {};
-      const distributed = distributeItem(empty, itemsFactory({ bijou: 25 }), 'bijou');
+      const distributed = distributeItem(empty, itemsFactory({bijou: 25}), 'bijou');
       expect(distributed[0]).toBe(empty);
     });
   });
@@ -108,7 +108,7 @@ describe('distribution', () => {
 
     it('handles empty character lists', () => {
       const empty = {};
-      const distributed = distributeCoinSets(empty, itemsFactory({ bijou: 25 }));
+      const distributed = distributeCoinSets(empty, itemsFactory({bijou: 25}));
       expect(distributed[0]).toBe(empty);
     });
   });
@@ -165,16 +165,16 @@ describe('distribution', () => {
         ...charFactory('Cabinets/Garage', {
           zulian: 2,
           razzashi: 4,
-          hakkari: 9
+          hakkari: 9,
         }),
-      }
+      };
 
       expect(lowestRepSort(characters)).toMatchSnapshot();
     });
 
     it('tie breaks using the count of non rep items', () => {
       characters = {
-        ...charFactory('Hah', { bijou: 1 }),
+        ...charFactory('Hah', {bijou: 1}),
         ...charFactory('Gearman'),
         ...charFactory('Teaspoon', {
           gurubashi: 3,
@@ -186,7 +186,7 @@ describe('distribution', () => {
           razzashi: 4,
           hakkari: 4,
         }),
-      }
+      };
 
       // tsp and garage have the same number of coins, but tsp's items represent 75 rep while Garage's only represent 25 rep
       expect(lowestRepSort(characters)).toMatchSnapshot();
@@ -195,13 +195,17 @@ describe('distribution', () => {
 
   describe('nonRepSum', () => {
     it('works', () => {
-      expect(nonRepSum(itemsFactory({
-        bijou: 1,
-        zulian: 1,
-        razzashi: 2,
-        hakkari: 1,
-        sandfury: 1,
-      }))).toEqual(2);
-    })
-  })
+      expect(
+        nonRepSum(
+          itemsFactory({
+            bijou: 1,
+            zulian: 1,
+            razzashi: 2,
+            hakkari: 1,
+            sandfury: 1,
+          })
+        )
+      ).toEqual(2);
+    });
+  });
 });
