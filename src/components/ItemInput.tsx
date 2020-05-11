@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { Input } from '@chakra-ui/core';
 
 interface Props {
   name: string;
@@ -10,7 +11,12 @@ interface Props {
 const ItemInput: React.FC<Props> = ({name, value, onBlur}) => {
   const [count, setCount] = useState(value);
   return <>
-    {name}: <input type="text" onChange={(e) => setCount(Number(e.target.value))} onBlur={(e) => onBlur(Number(e.target.value))} value={count} />
+    {name}:
+    <Input
+      type="text"
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCount(Number(e.target.value))}
+      onBlur={(e: React.ChangeEvent<HTMLInputElement>) => onBlur(Number(e.target.value))} value={count}
+    />
   </>;
 };
 
