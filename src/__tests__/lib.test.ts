@@ -77,6 +77,12 @@ describe('distribution', () => {
       const distributed = distributeItem(characters, itemsFactory({ bijou: 25 }), 'bijou');
       expect(distributed[1]).toMatchSnapshot();
     });
+
+    it('handles empty character lists', () => {
+      const empty = {};
+      const distributed = distributeItem(empty, itemsFactory({ bijou: 25 }), 'bijou');
+      expect(distributed[0]).toBe(empty);
+    });
   });
 
   describe('distributeCoinSets', () => {
@@ -98,6 +104,12 @@ describe('distribution', () => {
       });
       expect(distributed).toMatchSnapshot();
       expect(remainingCoins).toMatchSnapshot();
+    });
+
+    it('handles empty character lists', () => {
+      const empty = {};
+      const distributed = distributeCoinSets(empty, itemsFactory({ bijou: 25 }));
+      expect(distributed[0]).toBe(empty);
     });
   });
 

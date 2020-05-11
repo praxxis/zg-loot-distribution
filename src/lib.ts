@@ -68,6 +68,10 @@ export const lowestRepSort = (characters: {[name: string]: Character}) => {
 function distributeItem(characters: { [name: string]: Character }, items: { [k in Items]: number }, item: Items) {
   const names = lowestRepSort(characters);
 
+  if (names.length === 0) {
+    return [characters, items] as const;
+  }
+
   const distributed: { [name: string]: Character } = produce(characters, (draft) => {
     // zero out this item for everyone
     // names.forEach((name) => draft[name].items[item] = 0);
@@ -86,6 +90,10 @@ function distributeCoinSets(characters: { [name: string]: Character }, items: { 
   const remainingItems = {...items};
 
   let names = lowestRepSort(characters);
+
+  if (names.length === 0) {
+    return [characters, items] as const;
+  }
 
   const distributed: { [name: string]: Character } = produce(characters, (draft) => {
     coinSets.forEach((coins) => {
