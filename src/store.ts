@@ -1,44 +1,17 @@
 import {setAutoFreeze} from 'immer';
 import {useCallback} from 'react';
 import {useImmerReducer} from 'use-immer';
-import {distributeItems} from './lib';
+import {emptyItems} from './const';
+import {distributeItems} from './lib/distribution';
 import {Character, Items} from './types';
 
 // todo: investigate this error
 setAutoFreeze(false);
 
-const initialItems: {[k in Items]: number} = {
-  bijou: 0,
-  zulian: 0,
-  razzashi: 0,
-  hakkari: 0,
-  sandfury: 0,
-  skullsplitter: 0,
-  bloodscalp: 0,
-  gurubashi: 0,
-  vilebranch: 0,
-  witherbark: 0,
-};
-
-const itemNames = [
-  'bijou',
-  'zulian',
-  'razzashi',
-  'hakkari',
-  'sandfury',
-  'skullsplitter',
-  'bloodscalp',
-  'gurubashi',
-  'vilebranch',
-  'witherbark',
-] as const;
-
-export {itemNames};
-
 const initialCharacters: {[name: string]: Character} = {};
 
 interface State {
-  items: typeof initialItems;
+  items: typeof emptyItems;
   characters: {[name: string]: Character};
 }
 
@@ -52,7 +25,7 @@ const useStore = () => {
       switch (action.type) {
         case 'UPDATE_CHARACTERS':
           let characters = action.newCharacters.reduce((accu, name) => {
-            return {...accu, [name]: {sent: false, items: {...initialItems}}};
+            return {...accu, [name]: {sent: false, items: {...emptyItems}}};
           }, {});
 
           draft.characters = distributeItems(characters, draft.items);
@@ -64,7 +37,7 @@ const useStore = () => {
       }
     },
     {
-      items: initialItems,
+      items: emptyItems,
       characters: initialCharacters,
     }
   );

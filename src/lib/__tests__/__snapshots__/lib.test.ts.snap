@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`distribution lowestRepSort tie breaks using the count of non rep items 1`] = `
+Array [
+  "Gearman",
+  "Cabinets/Garage",
+  "Hah",
+  "Teaspoon",
+]
+`;
+
+exports[`distribution lowestRepSort works 1`] = `
+Array [
+  "Gearman",
+  "Teaspoon",
+  "Cabinets/Garage",
+  "Hah",
+]
+`;

@@ -1,8 +1,9 @@
 import {Box, CSSReset, Flex, Heading, SimpleGrid, Textarea, ThemeProvider} from '@chakra-ui/core';
 import React from 'react';
 import ItemInput from './components/ItemInput';
+import {itemNames} from './const';
 import {repSum} from './lib';
-import useStore, {itemNames} from './store';
+import useStore from './store';
 
 function App() {
   const [{characters, items}, {updateCharacters, updateItem}] = useStore();
