@@ -23,12 +23,16 @@ const Controls: React.FC<Props> = ({items, updateItem, updateCharacters}) => {
         ></Textarea>
       </Box>
       <Box p={5}>
-        <ItemInput
-          name={'bijou'}
-          value={items['bijou']}
-          onBlur={(count) => updateItem('bijou', count)}
-        />
         <SimpleGrid columns={3} spacing={2}>
+          <div>
+            <ItemInput
+              name={'bijou'}
+              value={items['bijou']}
+              onBlur={(count) => updateItem('bijou', count)}
+            />
+          </div>
+          <div>&nbsp;</div>
+          <div>&nbsp;</div>
           {itemNames
             .filter((itemName) => itemName !== 'bijou')
             .map((itemName) => (
