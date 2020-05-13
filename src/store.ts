@@ -17,30 +17,33 @@ interface State {
 
 type Action =
   | {type: 'UPDATE_CHARACTERS'; newCharacters: string[]}
-  | {type: 'UPDATE_ITEM'; itemName: ItemNames; count: number};
+  | {type: 'UPDATE_ITEM'; itemName: ItemNames; count: number}
+  | {type: 'TOGGLE_SENT_ITEMS'; character: string};
+
+const reducer = (draft: State, action: Action) => {
+  switch (action.type) {
+    case 'UPDATE_CHARACTERS':
+      let characters = action.newCharacters.reduce((accu, name) => {
+        return {...accu, [name]: {sent: false, items: {...emptyItems}}};
+      }, {});
+
+      draft.characters = distributeItems(characters, draft.items);
+      break;
+    case 'UPDATE_ITEM':
+      draft.items[action.itemName] = action.count;
+      draft.characters = distributeItems(draft.characters, draft.items);
+      break;
+    case 'TOGGLE_SENT_ITEMS':
+      draft.characters[action.character].sent = !draft.characters[action.character].sent;
+      break;
+  }
+};
 
 const useStore = () => {
-  const [state, dispatch] = useImmerReducer(
-    (draft: State, action: Action) => {
-      switch (action.type) {
-        case 'UPDATE_CHARACTERS':
-          let characters = action.newCharacters.reduce((accu, name) => {
-            return {...accu, [name]: {sent: false, items: {...emptyItems}}};
-          }, {});
-
-          draft.characters = distributeItems(characters, draft.items);
-          break;
-        case 'UPDATE_ITEM':
-          draft.items[action.itemName] = action.count;
-          draft.characters = distributeItems(draft.characters, draft.items);
-          break;
-      }
-    },
-    {
-      items: emptyItems,
-      characters: initialCharacters,
-    }
-  );
+  const [state, dispatch] = useImmerReducer(reducer, {
+    items: emptyItems,
+    characters: initialCharacters,
+  });
 
   const updateCharacters = useCallback(
     (newCharacters: string[]) => dispatch({type: 'UPDATE_CHARACTERS', newCharacters}),
@@ -52,7 +55,12 @@ const useStore = () => {
     [dispatch]
   );
 
-  return [state, {updateCharacters, updateItem}] as const;
+  const toggleSentItems = useCallback(
+    (character: string) => dispatch({type: 'TOGGLE_SENT_ITEMS', character}),
+    [dispatch]
+  );
+
+  return [state, {updateCharacters, updateItem, toggleSentItems}] as const;
 };
 
 export default useStore;

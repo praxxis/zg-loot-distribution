@@ -5,7 +5,7 @@ import Controls from './components/Controls';
 import useStore from './store';
 
 function App() {
-  const [{characters, items}, {updateCharacters, updateItem}] = useStore();
+  const [{characters, items}, {updateCharacters, updateItem, toggleSentItems}] = useStore();
 
   return (
     <>
@@ -15,7 +15,7 @@ function App() {
           <Heading>Zul'Gurub bijou and coin distribution tool</Heading>
           <Flex direction="column">
             <Controls items={items} updateCharacters={updateCharacters} updateItem={updateItem} />
-            <Characters characters={characters} />
+            <Characters characters={characters} toggleSentItems={toggleSentItems} />
           </Flex>
         </Flex>
       </ThemeProvider>
