@@ -1,5 +1,6 @@
 import {Box, Flex, SimpleGrid, Textarea} from '@chakra-ui/core';
 import * as React from 'react';
+import {memo} from 'react';
 import {itemNames} from '../const';
 import {ItemNames, Items} from '../types';
 import ItemInput from './ItemInput';
@@ -17,9 +18,15 @@ const Controls: React.FC<Props> = ({items, updateItem, updateCharacters}) => {
         <Textarea
           height={400}
           placeholder="Enter character names, one per line"
-          onBlur={(e: React.ChangeEvent<HTMLInputElement>) =>
-            updateCharacters(e.target.value.split('\n'))
-          }
+          onBlur={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const characters = e.target.value.split('\n').filter((c) => !!c);
+
+            if (characters.length === 0) {
+              return;
+            }
+
+            updateCharacters(characters);
+          }}
         ></Textarea>
       </Box>
       <Box p={5}>
@@ -28,7 +35,7 @@ const Controls: React.FC<Props> = ({items, updateItem, updateCharacters}) => {
             <ItemInput
               name={'bijou'}
               value={items['bijou']}
-              onBlur={(count) => updateItem('bijou', count)}
+              onCountChange={(count) => updateItem('bijou', count)}
             />
           </div>
           <div>&nbsp;</div>
@@ -40,7 +47,7 @@ const Controls: React.FC<Props> = ({items, updateItem, updateCharacters}) => {
                 <ItemInput
                   name={itemName}
                   value={items[itemName]}
-                  onBlur={(count) => updateItem(itemName, count)}
+                  onCountChange={(count) => updateItem(itemName, count)}
                 />
               </div>
             ))}
@@ -50,4 +57,6 @@ const Controls: React.FC<Props> = ({items, updateItem, updateCharacters}) => {
   );
 };
 
-export default Controls;
+(Controls as any).whyDidYouRender = true;
+
+export default memo(Controls);

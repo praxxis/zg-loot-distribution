@@ -23,4 +23,6 @@ function App() {
   );
 }
 
+(App as any).whyDidYouRender = true;
+
 export default App;

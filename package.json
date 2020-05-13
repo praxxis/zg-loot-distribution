@@ -48,6 +48,7 @@
     }
   },
   "devDependencies": {
+    "@welldone-software/why-did-you-render": "^4.2.1",
     "husky": "^4.2.5",
     "prettier": "2.0.5",
     "prettier-plugin-organize-imports": "^1.0.3",
