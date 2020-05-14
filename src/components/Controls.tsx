@@ -20,11 +20,6 @@ const Controls: React.FC<Props> = ({items, updateItem, updateCharacters}) => {
           placeholder="Enter character names, one per line"
           onBlur={(e: React.ChangeEvent<HTMLInputElement>) => {
             const characters = e.target.value.split('\n').filter((c) => !!c);
-
-            if (characters.length === 0) {
-              return;
-            }
-
             updateCharacters(characters);
           }}
         ></Textarea>
