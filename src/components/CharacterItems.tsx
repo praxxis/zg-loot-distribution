@@ -23,8 +23,8 @@ const Container = styled(Box)`
 
 const CharacterItems: React.FC<Props> = ({name, character, toggleSentItems}) => {
   return (
-    <Container bg="gray.300" onClick={() => toggleSentItems(name)}>
-      <Flex alignItems="center" justifyContent="space-between">
+    <Container onClick={() => toggleSentItems(name)}>
+      <Flex bg="gray.300" alignItems="center" justifyContent="space-between" p="2">
         <Heading>{name}</Heading>
         <Text>Total rep: {repSum(character.items)}</Text>
         <Box>
@@ -39,7 +39,7 @@ const CharacterItems: React.FC<Props> = ({name, character, toggleSentItems}) => 
           </Checkbox>
         </Box>
       </Flex>
-      <SimpleGrid columns={3} spacing={2}>
+      <SimpleGrid columns={3} spacing={2} bg="gray.200" p="2">
         <Flex key={`${name}bijou`} justifyContent="space-between">
           <Item name={'bijou'} /> {character.items['bijou']}
         </Flex>

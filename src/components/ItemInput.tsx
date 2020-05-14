@@ -1,4 +1,4 @@
-import {Input} from '@chakra-ui/core';
+import {Box, Input} from '@chakra-ui/core';
 import styled from '@emotion/styled';
 import * as React from 'react';
 import {useState} from 'react';
@@ -27,7 +27,9 @@ const ItemInput: React.FC<Props> = ({name, value, onCountChange}) => {
 
   return (
     <>
-      <Item name={name} />
+      <Box mb={1}>
+        <Item name={name} />
+      </Box>
       <Input
         type="text"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCount(Number(e.target.value))}

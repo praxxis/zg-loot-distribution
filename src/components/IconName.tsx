@@ -33,7 +33,7 @@ const icons = {
 const IconName: React.FC<Props> = ({name, className}) => {
   return (
     <Flex className={className} alignItems="center">
-      <Image size="20px" src={icons[name]} />
+      <Image size="20px" src={icons[name]} mr="1" />
       <Heading size="xs">{name}</Heading>
     </Flex>
   );
