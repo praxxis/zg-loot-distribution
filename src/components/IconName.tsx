@@ -1,15 +1,5 @@
 import {Flex, Heading, Image} from '@chakra-ui/core';
 import * as React from 'react';
-import bijou from '../images/icons/bijou.webp';
-import bloodscalp from '../images/icons/bloodscalp.webp';
-import gurubashi from '../images/icons/gurubashi.webp';
-import hakkari from '../images/icons/hakkari.webp';
-import razzashi from '../images/icons/razzashi.webp';
-import sandfury from '../images/icons/sandfury.webp';
-import skullsplitter from '../images/icons/skullsplitter.webp';
-import vilebranch from '../images/icons/vilebranch.webp';
-import witherbark from '../images/icons/witherbark.webp';
-import zulian from '../images/icons/zulian.webp';
 import {ItemNames} from '../types';
 
 interface Props {
@@ -18,16 +8,16 @@ interface Props {
 }
 
 const icons = {
-  bijou,
-  zulian,
-  razzashi,
-  hakkari,
-  sandfury,
-  skullsplitter,
-  bloodscalp,
-  gurubashi,
-  vilebranch,
-  witherbark,
+  bijou: 'https://wow.zamimg.com/images/wow/icons/large/inv_bijou_green.jpg',
+  zulian: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_armorkit_11.jpg',
+  razzashi: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_coin_10.jpg',
+  hakkari: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_coin_09.jpg',
+  sandfury: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_coin_15.jpg',
+  skullsplitter: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_coin_12.jpg',
+  bloodscalp: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_coin_11.jpg',
+  gurubashi: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_coin_07.jpg',
+  vilebranch: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_coin_13.jpg',
+  witherbark: 'https://wow.zamimg.com/images/wow/icons/large/inv_misc_coin_14.jpg',
 };
 
 const IconName: React.FC<Props> = ({name, className}) => {
