@@ -1,5 +1,5 @@
-import {Flex, Heading, Image} from '@chakra-ui/core';
 import * as React from 'react';
+import {cn} from '../lib/utils';
 import {ItemNames} from '../types';
 
 interface Props {
@@ -22,10 +22,10 @@ const icons = {
 
 const IconName: React.FC<Props> = ({name, className}) => {
   return (
-    <Flex className={className} alignItems="center">
-      <Image size="20px" src={icons[name]} mr="1" />
-      <Heading size="xs">{name}</Heading>
-    </Flex>
+    <div className={cn("flex items-center", className)}>
+      <img src={icons[name]} alt={name} className="w-5 h-5 mr-1" />
+      <span className="text-xs font-semibold">{name}</span>
+    </div>
   );
 };
 

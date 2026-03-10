@@ -1,4 +1,3 @@
-import {SimpleGrid} from '@chakra-ui/core';
 import * as React from 'react';
 import {Character} from '../types';
 import CharacterItems from './CharacterItems';
@@ -10,7 +9,7 @@ interface Props {
 
 const Characters: React.FC<Props> = ({characters, toggleSentItems}) => {
   return (
-    <SimpleGrid columns={3} spacing={2}>
+    <div className="grid grid-cols-3 gap-2">
       {Object.keys(characters).map((name) => (
         <CharacterItems
           key={name}
@@ -19,7 +18,7 @@ const Characters: React.FC<Props> = ({characters, toggleSentItems}) => {
           toggleSentItems={toggleSentItems}
         />
       ))}
-    </SimpleGrid>
+    </div>
   );
 };
 
