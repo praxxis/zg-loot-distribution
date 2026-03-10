@@ -1,4 +1,3 @@
-import {CSSReset, Flex, Heading, ThemeProvider} from '@chakra-ui/core';
 import React from 'react';
 import Characters from './components/Characters';
 import Controls from './components/Controls';
@@ -8,18 +7,13 @@ function App() {
   const [{characters, items}, {updateCharacters, updateItem, toggleSentItems}] = useStore();
 
   return (
-    <>
-      <ThemeProvider>
-        <CSSReset />
-        <Flex direction="column" p={5}>
-          <Heading>Zul'Gurub bijou and coin distribution tool</Heading>
-          <Flex direction="column">
-            <Controls items={items} updateCharacters={updateCharacters} updateItem={updateItem} />
-            <Characters characters={characters} toggleSentItems={toggleSentItems} />
-          </Flex>
-        </Flex>
-      </ThemeProvider>
-    </>
+    <div className="flex flex-col p-5">
+      <h1 className="text-2xl font-bold mb-4">Zul'Gurub bijou and coin distribution tool</h1>
+      <div className="flex flex-col">
+        <Controls items={items} updateCharacters={updateCharacters} updateItem={updateItem} />
+        <Characters characters={characters} toggleSentItems={toggleSentItems} />
+      </div>
+    </div>
   );
 }
 

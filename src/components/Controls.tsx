@@ -1,8 +1,8 @@
-import {Box, Flex, SimpleGrid, Textarea} from '@chakra-ui/core';
 import * as React from 'react';
 import {memo} from 'react';
 import {itemNames} from '../const';
 import {ItemNames, Items} from '../types';
+import {Textarea} from './ui/textarea';
 import ItemInput from './ItemInput';
 
 interface Props {
@@ -13,19 +13,19 @@ interface Props {
 
 const Controls: React.FC<Props> = ({items, updateItem, updateCharacters}) => {
   return (
-    <Flex>
-      <Box p={5}>
+    <div className="flex">
+      <div className="p-5">
         <Textarea
-          height={400}
+          className="h-[400px]"
           placeholder="Enter character names, one per line"
-          onBlur={(e: React.ChangeEvent<HTMLInputElement>) => {
+          onBlur={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             const characters = e.target.value.split('\n').filter((c) => !!c);
             updateCharacters(characters);
           }}
-        ></Textarea>
-      </Box>
-      <Box p={5}>
-        <SimpleGrid columns={3} spacing={2}>
+        />
+      </div>
+      <div className="p-5">
+        <div className="grid grid-cols-3 gap-2">
           <div>
             <ItemInput
               name={'bijou'}
@@ -46,9 +46,9 @@ const Controls: React.FC<Props> = ({items, updateItem, updateCharacters}) => {
                 />
               </div>
             ))}
-        </SimpleGrid>
-      </Box>
-    </Flex>
+        </div>
+      </div>
+    </div>
   );
 };
 

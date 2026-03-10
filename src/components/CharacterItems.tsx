@@ -1,10 +1,9 @@
-import {Box, Checkbox, Flex, Heading, SimpleGrid, Text} from '@chakra-ui/core';
-import styled from '@emotion/styled';
 import * as React from 'react';
 import {memo} from 'react';
 import {itemNames} from '../const';
 import {repSum} from '../lib';
 import {Character} from '../types';
+import {Checkbox} from './ui/checkbox';
 import IconName from './IconName';
 
 interface Props {
@@ -13,47 +12,36 @@ interface Props {
   toggleSentItems: (character: string) => void;
 }
 
-const Item = styled(IconName)`
-  text-transform: capitalize;
-`;
-
-const Container = styled(Box)`
-  cursor: pointer;
-`;
-
 const CharacterItems: React.FC<Props> = ({name, character, toggleSentItems}) => {
   return (
-    <Container onClick={() => toggleSentItems(name)}>
-      <Flex bg="gray.300" alignItems="center" justifyContent="space-between" p="2">
-        <Heading>{name}</Heading>
-        <Text>Total rep: {repSum(character.items)}</Text>
-        <Box>
+    <div className="cursor-pointer" onClick={() => toggleSentItems(name)}>
+      <div className="flex bg-gray-300 items-center justify-between p-2">
+        <h2 className="text-xl font-bold">{name}</h2>
+        <span>Total rep: {repSum(character.items)}</span>
+        <div className="flex items-center gap-2">
           <Checkbox
-            size="lg"
-            variantColor="green"
-            isChecked={character.sent}
-            isReadOnly={true}
-            onClick={(e: React.MouseEvent<HTMLInputElement>) => e.preventDefault()}
-          >
-            Sent
-          </Checkbox>
-        </Box>
-      </Flex>
-      <SimpleGrid columns={3} spacing={2} bg="gray.200" p="2">
-        <Flex key={`${name}bijou`} justifyContent="space-between">
-          <Item name={'bijou'} /> {character.items['bijou']}
-        </Flex>
+            checked={character.sent}
+            onCheckedChange={() => {}}
+            onClick={(e: React.MouseEvent) => e.preventDefault()}
+          />
+          <span className="text-sm">Sent</span>
+        </div>
+      </div>
+      <div className="grid grid-cols-3 gap-2 bg-gray-200 p-2">
+        <div className="flex justify-between">
+          <IconName name={'bijou'} className="capitalize" /> {character.items['bijou']}
+        </div>
         <div></div>
         <div></div>
         {itemNames
           .filter((itemName) => itemName !== 'bijou')
           .map((itemName) => (
-            <Flex key={`${name}${itemName}`} justifyContent="space-between">
-              <Item name={itemName} /> {character.items[itemName]}
-            </Flex>
+            <div key={`${name}${itemName}`} className="flex justify-between">
+              <IconName name={itemName} className="capitalize" /> {character.items[itemName]}
+            </div>
           ))}
-      </SimpleGrid>
-    </Container>
+      </div>
+    </div>
   );
 };
 
