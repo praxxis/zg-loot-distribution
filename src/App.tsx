@@ -1,4 +1,3 @@
-import React from 'react';
 import Characters from './components/Characters';
 import Controls from './components/Controls';
 import useStore from './store';
